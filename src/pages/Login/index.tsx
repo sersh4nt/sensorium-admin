@@ -1,31 +1,42 @@
 import {
-  Container,
-  Title,
-  Text,
   Anchor,
-  Paper,
-  Group,
-  TextInput,
-  PasswordInput,
-  Checkbox,
   Button,
+  Checkbox,
+  Container,
+  Group,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
 } from "@mantine/core";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useAuthTokenLoginCreate } from "../../api/auth/auth";
+import { useAuth } from "../../providers/AuthProvider";
 
 type LoginInputs = {
   username: string;
   password: string;
+  remember: boolean;
 };
 
 const Login: React.FC = () => {
+  const { setToken } = useAuth();
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm<LoginInputs>();
+  const { control, handleSubmit } = useForm<LoginInputs>({
+    defaultValues: { username: "", password: "", remember: true },
+  });
+
+  const { mutateAsync, isPending, error } = useAuthTokenLoginCreate();
 
   const signUp = () => navigate("/signup");
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+    const { remember, ...rest } = data;
+    var response = await mutateAsync({ data: rest });
+    setToken(response.auth_token, remember);
+    navigate("/");
   };
 
   return (
@@ -65,14 +76,25 @@ const Login: React.FC = () => {
             )}
           />
           <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
+            <Controller
+              name="remember"
+              control={control}
+              render={({ field: { value, ...rest } }) => (
+                <Checkbox label="Remember me" checked={value} {...rest} />
+              )}
+            />
             <Anchor component="button" size="sm">
               Forgot password?
             </Anchor>
           </Group>
-          <Button fullWidth mt="xl" type="submit">
+          <Button fullWidth mt="xl" type="submit" loading={isPending}>
             Sign in
           </Button>
+          {error && (
+            <Text mt="sm" c="red">
+              {error.errors.at(0)?.code}
+            </Text>
+          )}
         </form>
       </Paper>
     </Container>

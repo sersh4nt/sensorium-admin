@@ -1,5 +1,4 @@
-import { useEffect, useState, useMemo, createContext, useContext } from "react";
-import axios from "axios";
+import { useState, createContext, useContext } from "react";
 
 interface AuthProviderProps {
   children: React.ReactElement;
@@ -7,30 +6,34 @@ interface AuthProviderProps {
 
 export interface AuthContext {
   token: string | null;
-  setToken: (token: string) => void;
+  setToken: (token: string, remember: boolean) => void;
+  removeToken: () => void;
 }
 
 const AuthContext = createContext<AuthContext>({
   token: null,
   setToken: () => {},
+  removeToken: () => {},
 });
 
 const AuthProvider = (props: AuthProviderProps) => {
-  const [token, setToken_] = useState(localStorage.getItem("token"));
+  const [token, setToken_] = useState<string | null>(
+    localStorage.getItem("token")
+  );
 
-  const setToken = (token: string) => setToken_(token);
-
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common.Authorization = `Token ${token}`;
+  const setToken = (token: string, remember: boolean = true) => {
+    setToken_(token);
+    if (remember) {
       localStorage.setItem("token", token);
-    } else {
-      delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
     }
-  }, [token]);
+  };
 
-  const value = useMemo(() => ({ token, setToken }), [token]);
+  const removeToken = () => {
+    setToken_(null);
+    localStorage.removeItem("token");
+  };
+
+  const value = { token, setToken, removeToken };
 
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>

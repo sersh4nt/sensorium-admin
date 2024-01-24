@@ -1,15 +1,23 @@
-import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AuthProvider from "./providers/AuthProvider";
+import AxiosProvider from "./providers/axios";
 import { Router } from "./routes";
 import { theme } from "./theme";
-import AuthProvider from "./providers/AuthProvider";
+
+const client = new QueryClient();
 
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
-    </MantineProvider>
+    <QueryClientProvider client={client}>
+      <MantineProvider theme={theme}>
+        <AuthProvider>
+          <AxiosProvider>
+            <Router />
+          </AxiosProvider>
+        </AuthProvider>
+      </MantineProvider>
+    </QueryClientProvider>
   );
 }
