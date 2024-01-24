@@ -2,7 +2,7 @@ import { resources } from "../i18n";
 
 declare module "i18next" {
   interface CustomTypeOptions {
-    resources: (typeof resources)["en"];
+    resources: (typeof resources)["en"] | string;
     returnNull: false;
   }
 }
