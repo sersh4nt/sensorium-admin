@@ -10,9 +10,9 @@ import {
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { useAuthTokenLoginCreate } from "../../api/auth/auth";
-import Form from "../../components/forms/Form";
-import { useAuth } from "../../providers/AuthProvider";
+import { useAuthTokenLoginCreate } from "../api/auth/auth";
+import Form from "../components/forms/Form";
+import { useAuth } from "../providers/AuthProvider";
 
 type LoginInputs = {
   username: string;
@@ -20,7 +20,7 @@ type LoginInputs = {
   remember: boolean;
 };
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
   const { t } = useTranslation();
   const { setToken } = useAuth();
   const navigate = useNavigate();
@@ -55,13 +55,6 @@ const Login: React.FC = () => {
       }
     );
   };
-
-  // const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-  //   const { remember, ...rest } = data;
-  //   var response = await mutateAsync({ data: rest });
-  //   setToken(response.auth_token, remember);
-  //   navigate("/");
-  // };
 
   return (
     <Container size={420} my={20}>
@@ -118,5 +111,3 @@ const Login: React.FC = () => {
     </Container>
   );
 };
-
-export default Login;

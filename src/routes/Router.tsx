@@ -1,17 +1,42 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
-import Login from "../pages/Login";
-import NotFound from "../pages/NotFound";
+import Layout from "../layouts";
+import { Login, NotFound, Signup, Dashborad, Devices } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
-import Signup from "../pages/Signup";
+
+export type Route = RouteObject & {
+  label: string;
+};
+
+export const ROUTES: Route[] = [
+  {
+    path: "/",
+    element: <Dashborad />,
+    label: "dashboard",
+  },
+  {
+    path: "/devices",
+    element: <Devices />,
+    label: "devices",
+  },
+  {
+    path: "/indicators",
+    element: <div>indicators</div>,
+    label: "indicators",
+  },
+];
 
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
       {
-        path: "/",
-        element: <NotFound />,
+        element: <Layout />,
+        children: ROUTES,
       },
     ],
   },

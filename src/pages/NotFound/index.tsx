@@ -1,9 +1,9 @@
-import { Container, Title, Text, Button, Group } from "@mantine/core";
+import { Button, Container, Group, Text, Title } from "@mantine/core";
+import { useTranslation } from "react-i18next";
 import { Illustration } from "./Illustration";
 import classes from "./NotFound.module.css";
-import { useTranslation } from "react-i18next";
 
-const NotFound: React.FC = () => {
+export const NotFound: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -28,5 +28,3 @@ const NotFound: React.FC = () => {
     </Container>
   );
 };
-
-export default NotFound;

@@ -26,6 +26,7 @@ const AxiosProvider = ({ children }: { children: React.ReactElement }) => {
     const responseInterceptor = AXIOS_INSTANCE.interceptors.response.use(
       (value) => value,
       (error) => {
+        console.log(error)
         if (error?.response?.status == 401) {
           localStorage.removeItem("token");
         }

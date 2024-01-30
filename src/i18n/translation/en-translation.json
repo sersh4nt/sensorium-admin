@@ -33,5 +33,13 @@
     "email": "E-mail",
     "field_required": "This field is required",
     "passwords_mismatch": "Passwords dismatch",
-    "unique_user": "A user with this username already exists"
+    "unique_user": "A user with this username already exists",
+    "dashboarad": "Main page",
+    "devices": "Devices",
+    "device_id": "Device #{{device_id}}",
+    "disabled": "Disabled",
+    "active": "Acive",
+    "inactive": "Inactive",
+    "name_": "Name: {{name}}",
+    "create_device": "Create device"
 }
