@@ -1,0 +1,29 @@
+include:
+  - project: "devops/ci"
+    ref: main
+    file: templates/.gitlab.yml
+  - project: "devops/ci"
+    ref: main
+    file: templates/.docker.yml
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - build
+  - publish
+  - release
+
+get-release-version:
+  extends: .get-release-version
+  before_script:
+    - export VERSION=$(cat package.json | jq -r '.version')
+
+build:
+  extends: .build-push
+
+publish:
+  extends: .publish-container
+
+release:
+  extends: .create-release
