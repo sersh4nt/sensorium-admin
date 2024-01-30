@@ -41,5 +41,13 @@
     "active": "Acive",
     "inactive": "Inactive",
     "name_": "Name: {{name}}",
-    "create_device": "Create device"
+    "create_device": "Create device",
+    "device_created": "Device created successfully",
+    "copy_device_code": "Для завершения добавления устройства зайдите в приложение и введите в нем следующий код доступа:",
+    "copy_device_code_affix": "Внимание! Данный код доступа является одноразовым и действует в течение 24 часов. При закрытии данного окна восстановить код будет невозможно!",
+    "ok": "OK",
+    "copy": "Copy",
+    "copied": "Copied",
+    "indicators": "Indicators",
+    "no_devices_found": "There are no devices linked to your account."
 }

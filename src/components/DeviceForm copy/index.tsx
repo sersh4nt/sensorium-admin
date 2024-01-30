@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Form from "../forms/Form";
 
 interface DeviceFormProps {
-  defaultValues?: string;
+  defaultValues?: any;
   onSubmit: () => void;
 }
 

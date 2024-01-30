@@ -1,9 +1,10 @@
+import { Device } from "@/src/models";
 import { useForm } from "react-hook-form";
 import Form from "../forms/Form";
 
 interface DeviceFormProps {
-  defaultValues?: string;
-  onSubmit: () => void;
+  defaultValues?: Device;
+  onSubmit: (data: any) => void;
 }
 
 const DeviceForm: React.FC<DeviceFormProps> = ({ defaultValues, onSubmit }) => {
@@ -17,7 +18,7 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ defaultValues, onSubmit }) => {
     <Form
       control={control}
       onSubmit={handleSubmit(onSubmit)}
-      fields={[]}
+      fields={[{ name: "name", type: "text", label: "text", required: true }]}
       errors={errors}
     />
   );

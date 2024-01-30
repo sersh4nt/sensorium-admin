@@ -1,5 +1,4 @@
 import { Burger, Container, Group } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 
 import { useTranslation } from "react-i18next";
 import { ROUTES } from "../../routes/Router";
@@ -7,10 +6,14 @@ import classes from "./AppHeader.module.css";
 import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
 
-export const AppHeader: React.FC = () => {
+interface AppHeaderProps {
+  opened: boolean;
+  toggle: () => void;
+}
+
+export const AppHeader: React.FC<AppHeaderProps> = ({ opened, toggle }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [opened, { toggle }] = useDisclosure(false);
 
   return (
     <header className={classes.header}>
