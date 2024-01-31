@@ -1,8 +1,9 @@
-import { ROUTES } from "../../routes/Router";
-import { UnstyledButton } from "@mantine/core";
+import { Box, Stack, UnstyledButton } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import classes from "./AppNavbar.module.css";
 import { useNavigate } from "react-router";
+import { useAuth } from "src/providers/AuthProvider";
+import { ROUTES } from "src/routes/Router";
+import classes from "./AppNavbar.module.css";
 
 interface AppNavbarProps {
   close: () => void;
@@ -11,22 +12,34 @@ interface AppNavbarProps {
 const AppNavbar: React.FC<AppNavbarProps> = ({ close }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { removeToken } = useAuth();
 
   return (
-    <>
-      {ROUTES.map((route, key) => (
+    <div style={{ height: "100%" }}>
+      <Stack justify="space-between" h="100%">
+        <Box>
+          {ROUTES.map((route, key) => (
+            <UnstyledButton
+              className={classes.control}
+              key={key}
+              onClick={() => {
+                navigate(route.path ?? "/404");
+                close();
+              }}
+            >
+              {t(route.label)}
+            </UnstyledButton>
+          ))}
+        </Box>
         <UnstyledButton
           className={classes.control}
-          key={key}
-          onClick={() => {
-            navigate(route.path ?? "/404");
-            close();
-          }}
+          onClick={removeToken}
+          style={{ color: "red" }}
         >
-          {t(route.label)}
+          {t("logout")}
         </UnstyledButton>
-      ))}
-    </>
+      </Stack>
+    </div>
   );
 };
 

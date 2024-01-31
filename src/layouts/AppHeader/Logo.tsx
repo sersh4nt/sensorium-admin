@@ -1,4 +1,4 @@
-import myImage from "../../assets/images/logo.png";
+import myImage from "src/assets/images/logo.png";
 import { Image } from "@mantine/core";
 
 const Logo: React.FC = () => {

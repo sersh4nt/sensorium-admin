@@ -1,4 +1,4 @@
-import { Device } from "@/src/models";
+import { Device } from "src/models";
 import { useForm } from "react-hook-form";
 import Form from "../forms/Form";
 

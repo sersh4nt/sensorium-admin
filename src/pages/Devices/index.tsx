@@ -1,19 +1,32 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import {
   Button,
-  Center,
+  Divider,
+  Group,
   LoadingOverlay,
   SimpleGrid,
-  Stack,
   Text,
+  Title,
 } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
-import { useAuthGenerateDeviceCodeCreate } from "../../api/auth/auth";
-import { useControlDevicesList } from "../../api/control/control";
+import { useAuthGenerateDeviceCodeCreate } from "src/api/auth/auth";
+import {
+  controlDevicesList,
+  getControlDevicesListQueryKey,
+  useControlDevicesList,
+} from "src/api/control/control";
+import { client } from "src/providers/query";
 import DeviceCard from "./DeviceCard";
 
-export const Devices: React.FC = () => {
+export const loader = () => {
+  return client.fetchQuery({
+    queryFn: controlDevicesList,
+    queryKey: getControlDevicesListQueryKey(),
+  });
+};
+
+export const Component: React.FC = () => {
   const { mutate, isPending } = useAuthGenerateDeviceCodeCreate();
   const { data, isFetching } = useControlDevicesList();
   const { t } = useTranslation();
@@ -23,6 +36,7 @@ export const Devices: React.FC = () => {
       onSuccess: (data) =>
         modals.open({
           title: t("device_created"),
+          centered: true,
           children: (
             <>
               <Text ta="justify" mb="sm">
@@ -55,36 +69,29 @@ export const Devices: React.FC = () => {
     });
   };
 
-  if (isFetching) {
-    return (
-      <div style={{ width: "100%", height: "100%" }}>
-        <LoadingOverlay visible />
-      </div>
-    );
-  }
-
-  if (!data) {
-    return <div>cant fetch data</div>;
-  }
-
-  if (data.length == 0) {
-    return (
-      <Center>
-        <Stack align="center" gap="md">
-          <Text>{t("no_devices_found")}</Text>
-          <Button onClick={createDevice} loading={isPending}>
-            {t("create_device")}
-          </Button>
-        </Stack>
-      </Center>
-    );
-  }
-
   return (
-    <SimpleGrid cols={{ sm: 1, md: 2, lg: 4 }}>
-      {data?.map((device, key) => (
-        <DeviceCard key={key} device={device} />
-      ))}
-    </SimpleGrid>
+    <>
+      <Group justify="space-between">
+        <Title>{t("user_devices")}</Title>
+        <Button
+          onClick={createDevice}
+          loading={isPending}
+          color="teal"
+          variant="outline"
+        >
+          {t("create_device")}
+        </Button>
+      </Group>
+
+      <Divider my="sm" />
+
+      <SimpleGrid cols={{ sm: 1, md: 2, lg: 4 }}>
+        {isFetching && <LoadingOverlay visible />}
+        {data?.length == 0 && <Text>{t("no_devices_found")}</Text>}
+        {data?.map((device, key) => (
+          <DeviceCard key={key} device={device} />
+        ))}
+      </SimpleGrid>
+    </>
   );
 };

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Form from "../forms/Form";
+import Form from "src/components/forms/Form";
 
 interface DeviceFormProps {
   defaultValues?: any;

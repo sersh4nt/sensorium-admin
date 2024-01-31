@@ -49,5 +49,7 @@
     "copy": "Copy",
     "copied": "Copied",
     "indicators": "Indicators",
-    "no_devices_found": "There are no devices linked to your account."
+    "no_devices_found": "There are no devices linked to your account.",
+    "logout": "Logout",
+    "user_devices": "User devices"
 }

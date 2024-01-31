@@ -10,9 +10,9 @@ import {
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { useAuthTokenLoginCreate } from "../api/auth/auth";
-import Form from "../components/forms/Form";
-import { useAuth } from "../providers/AuthProvider";
+import { useAuthTokenLoginCreate } from "src/api/auth/auth";
+import Form from "src/components/forms/Form";
+import { useAuth } from "src/providers/AuthProvider";
 
 type LoginInputs = {
   username: string;
@@ -20,7 +20,7 @@ type LoginInputs = {
   remember: boolean;
 };
 
-export const Login: React.FC = () => {
+export const Component: React.FC = () => {
   const { t } = useTranslation();
   const { setToken } = useAuth();
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export const Login: React.FC = () => {
       {
         onSuccess: (response) => {
           setToken(response.auth_token, remember);
-          navigate("/");
+          navigate(-1);
         },
         onError: (error) => {
           setError("root", {

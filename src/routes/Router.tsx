@@ -1,11 +1,7 @@
-import {
-  RouteObject,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 
-import Layout from "../layouts";
-import { Login, NotFound, Signup, Dashborad, Devices } from "../pages";
+import Layout from "src/layouts";
+import { NotFound } from "src/pages/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 
 export type Route = RouteObject & {
@@ -15,12 +11,12 @@ export type Route = RouteObject & {
 export const ROUTES: Route[] = [
   {
     path: "/",
-    element: <Dashborad />,
+    lazy: () => import("../pages/Dashboard"),
     label: "dashboard",
   },
   {
     path: "/devices",
-    element: <Devices />,
+    lazy: () => import("../pages/Devices"),
     label: "devices",
   },
   {
@@ -30,7 +26,7 @@ export const ROUTES: Route[] = [
   },
 ];
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
@@ -42,18 +38,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    lazy: () => import("../pages/Login"),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    lazy: () => import("../pages/Signup"),
   },
   {
     path: "*",
     element: <NotFound />,
   },
 ]);
-
-export const Router: React.FC = () => {
-  return <RouterProvider router={router} />;
-};

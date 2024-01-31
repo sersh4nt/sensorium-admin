@@ -11,7 +11,7 @@ export interface AuthContext {
 }
 
 const AuthContext = createContext<AuthContext>({
-  token: null,
+  token: localStorage.getItem("token"),
   setToken: () => {},
   removeToken: () => {},
 });

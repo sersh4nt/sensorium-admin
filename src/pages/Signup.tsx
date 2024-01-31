@@ -2,9 +2,9 @@ import { Anchor, Container, Paper, Text, Title } from "@mantine/core";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { useAuthTokenLoginCreate, useAuthUsersCreate } from "../api/auth/auth";
-import Form from "../components/forms/Form";
-import { useAuth } from "../providers/AuthProvider";
+import { useAuthTokenLoginCreate, useAuthUsersCreate } from "src/api/auth/auth";
+import Form from "src/components/forms/Form";
+import { useAuth } from "src/providers/AuthProvider";
 
 type SignupInputs = {
   username: string;
@@ -13,7 +13,7 @@ type SignupInputs = {
   password2: string;
 };
 
-export const Signup: React.FC = () => {
+export const Component: React.FC = () => {
   const { t } = useTranslation();
   const { setToken } = useAuth();
   const navigate = useNavigate();
