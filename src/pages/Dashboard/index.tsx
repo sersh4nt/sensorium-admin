@@ -13,7 +13,7 @@ import DevicesStats from "./DevicesStats";
 
 export const Component: React.FC = () => {
   const { t } = useTranslation();
-  const { data, isFetching } = useControlEquipmentList();
+  const { isFetching } = useControlEquipmentList();
 
   return (
     <Grid>
