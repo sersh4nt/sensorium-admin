@@ -11,6 +11,7 @@
 * `max_length` - max_length
 * `null` - null
 * `null_characters_not_allowed` - null_characters_not_allowed
+* `required` - required
 * `surrogate_characters_not_allowed` - surrogate_characters_not_allowed
  */
 export type ControlEquipmentCreateNameErrorComponentCode = typeof ControlEquipmentCreateNameErrorComponentCode[keyof typeof ControlEquipmentCreateNameErrorComponentCode];
@@ -23,5 +24,6 @@ export const ControlEquipmentCreateNameErrorComponentCode = {
   max_length: 'max_length',
   null: 'null',
   null_characters_not_allowed: 'null_characters_not_allowed',
+  required: 'required',
   surrogate_characters_not_allowed: 'surrogate_characters_not_allowed',
 } as const;

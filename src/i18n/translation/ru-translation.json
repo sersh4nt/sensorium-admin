@@ -61,5 +61,20 @@
     "delete_device": "Удаление устройства",
     "delete_device_sure": "Вы уверены, что хотите удалить это устройство? Данное действие невозможно отменить.",
     "confirm": "Подтверждаю",
-    "dont_do_it": "Нет, оставьте все как было"
+    "dont_do_it": "Нет, оставьте все как было",
+    "name": "Название",
+    "edit_device": "Редактировать устройство",
+    "submit": "Отправить",
+    "devices_stats": "Статистика по устройствам",
+    "active_devices": "Активные: {{count}}",
+    "all_devices": "Всего: {{count}}",
+    "equipment_stats": "Статистика по приборам",
+    "equipment_count": "Количество приборов: {{count}}",
+    "indicators_count": "Количество индикаторов: {{count}}",
+    "indicators_stats": "Статистика по индикаторам",
+    "values_stats": "Статистика превышениям",
+    "ejections_indicators": "Индикаторы: {{count}}",
+    "ejections_total": "Всего: {{count}}",
+    "indicators_total": "Всего: {{count}}",
+    "recognized_count": "Распознано на: {{count}}"
 }

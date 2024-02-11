@@ -28,7 +28,7 @@ export const loader = () => {
 
 export const Component: React.FC = () => {
   const { mutate, isPending } = useAuthGenerateDeviceCodeCreate();
-  const { data, isFetching } = useControlDevicesList();
+  const { data, isLoading } = useControlDevicesList();
   const { t } = useTranslation();
 
   const createDevice = () => {
@@ -84,9 +84,8 @@ export const Component: React.FC = () => {
       </Group>
 
       <Divider my="sm" />
-
       <SimpleGrid cols={{ sm: 1, md: 2, lg: 4 }}>
-        {isFetching && <LoadingOverlay visible />}
+        {isLoading && <LoadingOverlay visible />}
         {data?.length == 0 && <Text>{t("no_devices_found")}</Text>}
         {data?.map((device, key) => (
           <DeviceCard key={key} device={device} />

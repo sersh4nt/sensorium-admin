@@ -11,7 +11,6 @@ import { theme } from "src/theme";
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 
-
 export default function App() {
   return (
     <AuthProvider>

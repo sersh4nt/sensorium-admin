@@ -8,5 +8,5 @@
 export interface Equipment {
   description: string;
   readonly id: number;
-  name?: string;
+  name: string;
 }

@@ -9,7 +9,7 @@ export interface Device {
   readonly add_date: string;
   readonly id: number;
   last_active?: string | null;
-  name?: string;
+  name: string;
   readonly update_date: string;
   readonly user_id: number | null;
 }

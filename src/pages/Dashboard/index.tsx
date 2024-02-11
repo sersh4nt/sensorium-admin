@@ -10,6 +10,9 @@ import { IconPlus } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 import { useControlEquipmentList } from "src/api/control/control";
 import DevicesStats from "./DevicesStats";
+import EquipmentStats from "./EquipmentStats";
+import IndicatorsStats from "./IndicatorsStats";
+import ValuesStats from "./ValuesStats";
 
 export const Component: React.FC = () => {
   const { t } = useTranslation();
@@ -20,9 +23,9 @@ export const Component: React.FC = () => {
       <Grid.Col span={12}>
         <SimpleGrid cols={{ xs: 1, sm: 2, lg: 4 }}>
           <DevicesStats />
-          <DevicesStats />
-          <DevicesStats />
-          <DevicesStats />
+          <EquipmentStats />
+          <IndicatorsStats />
+          <ValuesStats />
         </SimpleGrid>
       </Grid.Col>
       <Grid.Col span={{ xs: 12, lg: 3 }}>

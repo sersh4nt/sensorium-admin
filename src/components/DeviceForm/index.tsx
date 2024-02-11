@@ -18,7 +18,7 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ defaultValues, onSubmit }) => {
     <Form
       control={control}
       onSubmit={handleSubmit(onSubmit)}
-      fields={[{ name: "name", type: "text", label: "text", required: true }]}
+      fields={[{ name: "name", type: "text", label: "name", required: true }]}
       errors={errors}
     />
   );

@@ -14,6 +14,7 @@ export interface ControlEquipmentUpdateNameErrorComponent {
 * `max_length` - max_length
 * `null` - null
 * `null_characters_not_allowed` - null_characters_not_allowed
+* `required` - required
 * `surrogate_characters_not_allowed` - surrogate_characters_not_allowed */
   code: ControlEquipmentUpdateNameErrorComponentCode;
   detail: string;
