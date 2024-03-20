@@ -1,8 +1,15 @@
+import { LoadingOverlay } from "@mantine/core";
 import { Navigate, Outlet } from "react-router";
-import { useAuth } from "src/providers/AuthProvider";
+import { useNavigation } from "react-router-dom";
+import { useToken } from "src/redux/hooks";
 
 const ProtectedRoute: React.FC = () => {
-  const { token } = useAuth();
+  const token = useToken();
+  const { state } = useNavigation();
+
+  if (state == "loading") {
+    return <LoadingOverlay visible />;
+  }
 
   if (!token) {
     return <Navigate to="/login" />;

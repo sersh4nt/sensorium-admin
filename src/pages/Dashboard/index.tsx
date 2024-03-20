@@ -1,23 +1,13 @@
-import {
-  Button,
-  Card,
-  Grid,
-  LoadingOverlay,
-  SimpleGrid,
-  Text,
-} from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
-import { useTranslation } from "react-i18next";
-import { useControlEquipmentList } from "src/api/control/control";
+import { Grid, SimpleGrid } from "@mantine/core";
 import DevicesStats from "./DevicesStats";
 import EquipmentStats from "./EquipmentStats";
 import IndicatorsStats from "./IndicatorsStats";
 import ValuesStats from "./ValuesStats";
+import React from "react";
+import EquipmentList from "./EquipmentList";
+import IndicatorChart from "./IndicatorChart";
 
 export const Component: React.FC = () => {
-  const { t } = useTranslation();
-  const { isFetching } = useControlEquipmentList();
-
   return (
     <Grid>
       <Grid.Col span={12}>
@@ -29,21 +19,10 @@ export const Component: React.FC = () => {
         </SimpleGrid>
       </Grid.Col>
       <Grid.Col span={{ xs: 12, lg: 3 }}>
-        <Card withBorder w="100%" h="100%">
-          <Text>{t("devices_list")}</Text>
-          <Button
-            fullWidth
-            color="teal"
-            variant="outline"
-            rightSection={<IconPlus size={14} />}
-          >
-            {t("create_device")}
-          </Button>
-          {isFetching && <LoadingOverlay visible />}
-        </Card>
+        <EquipmentList />
       </Grid.Col>
       <Grid.Col span={{ xs: 12, lg: 9 }}>
-        <Card withBorder w="100%" h="100%"></Card>
+        <IndicatorChart />
       </Grid.Col>
     </Grid>
   );

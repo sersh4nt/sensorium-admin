@@ -1,9 +1,10 @@
 import { Box, Stack, UnstyledButton } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { useAuth } from "src/providers/AuthProvider";
+import { useNavigate, useLocation } from "react-router";
 import { ROUTES } from "src/routes/Router";
 import classes from "./AppNavbar.module.css";
+import { useDispatch } from "react-redux";
+import { removeToken } from "src/redux/auth";
 
 interface AppNavbarProps {
   close: () => void;
@@ -12,7 +13,8 @@ interface AppNavbarProps {
 const AppNavbar: React.FC<AppNavbarProps> = ({ close }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { removeToken } = useAuth();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <div style={{ height: "100%" }}>
@@ -23,6 +25,10 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ close }) => {
               className={classes.control}
               key={key}
               onClick={() => {
+                if (route.path == location.pathname) {
+                  close();
+                  return;
+                }
                 navigate(route.path ?? "/404");
                 close();
               }}
@@ -33,7 +39,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ close }) => {
         </Box>
         <UnstyledButton
           className={classes.control}
-          onClick={removeToken}
+          onClick={() => dispatch(removeToken())}
           style={{ color: "red" }}
         >
           {t("logout")}

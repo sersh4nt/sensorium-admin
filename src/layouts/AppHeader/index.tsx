@@ -3,10 +3,11 @@ import { Avatar, Box, Burger, Container, Group, Menu } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "src/providers/AuthProvider";
 import { ROUTES } from "src/routes/Router";
 import classes from "./AppHeader.module.css";
 import Logo from "./Logo";
+import { useDispatch } from "react-redux";
+import { removeToken } from "src/redux/auth";
 
 interface AppHeaderProps {
   opened: boolean;
@@ -16,7 +17,7 @@ interface AppHeaderProps {
 export const AppHeader: React.FC<AppHeaderProps> = ({ opened, toggle }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { removeToken } = useAuth();
+  const dispatch = useDispatch();
 
   return (
     <header className={classes.header}>
@@ -48,7 +49,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ opened, toggle }) => {
                   <Menu.Item
                     leftSection={<IconLogout />}
                     color="red"
-                    onClick={removeToken}
+                    onClick={() => dispatch(removeToken())}
                   >
                     {t("logout")}
                   </Menu.Item>

@@ -2,6 +2,7 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 
 import Layout from "src/layouts";
 import { NotFound } from "src/pages/NotFound";
+import UnexpectedError from "src/pages/UnexpectedError";
 import ProtectedRoute from "./ProtectedRoute";
 
 export type Route = RouteObject & {
@@ -29,6 +30,7 @@ export const ROUTES: Route[] = [
 export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
+    errorElement: <UnexpectedError />,
     children: [
       {
         element: <Layout />,

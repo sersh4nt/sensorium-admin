@@ -72,7 +72,7 @@
     "equipment_count": "Количество приборов: {{count}}",
     "indicators_count": "Количество индикаторов: {{count}}",
     "indicators_stats": "Статистика по индикаторам",
-    "values_stats": "Статистика превышениям",
+    "values_stats": "Статистика превышений",
     "ejections_indicators": "Индикаторы: {{count}}",
     "ejections_total": "Всего: {{count}}",
     "indicators_total": "Всего: {{count}}",

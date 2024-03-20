@@ -1,10 +1,11 @@
 import { Anchor, Container, Paper, Text, Title } from "@mantine/core";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { useAuthTokenLoginCreate, useAuthUsersCreate } from "src/api/auth/auth";
 import Form from "src/components/forms/Form";
-import { useAuth } from "src/providers/AuthProvider";
+import { setToken } from "src/redux/auth";
 
 type SignupInputs = {
   username: string;
@@ -15,7 +16,7 @@ type SignupInputs = {
 
 export const Component: React.FC = () => {
   const { t } = useTranslation();
-  const { setToken } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     control,
@@ -49,7 +50,9 @@ export const Component: React.FC = () => {
             {
               onSuccess: (response) => {
                 navigate("/");
-                setToken(response.auth_token, true);
+                dispatch(
+                  setToken({ token: response.auth_token, remember: true })
+                );
               },
               onError: (error) =>
                 setError("root", {
